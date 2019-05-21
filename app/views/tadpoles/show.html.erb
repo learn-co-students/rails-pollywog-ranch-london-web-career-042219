@@ -4,6 +4,8 @@
   <!-- make form to make "Become a frog" button here -->
   <!-- the form should post to /tadpoles/:id/metamorphose -->
 
+  <a href="/tadpoles/<%=@tadpole.id%>/metamorphose"><button type="button" class="btn btn-primary">'Become a frog'</button></a>
+
   <p>Color: <%= @tadpole.color %></p>
   <p>Parent: <a href="/frogs/<%= @tadpole.frog.id %>"><%= @tadpole.frog.name %></a></p>
   <p>Lives: <a href="/ponds/<%= @tadpole.pond.id %>"><%= @tadpole.pond.name %></a></p>
@@ -16,3 +18,5 @@
 <div class="card">
   <img src="http://<%= @tadpole.color %>-tadpole.jpg.to/" alt="Tadpole Picture" width="300">
 </div>
+
+<button type="button" name="Become a frog"></button>

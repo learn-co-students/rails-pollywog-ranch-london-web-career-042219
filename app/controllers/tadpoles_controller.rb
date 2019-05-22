@@ -3,22 +3,27 @@ class TadpolesController < ApplicationController
 
   # add your metamorphose action here
 
+  #get /tadpoles
   def index
     @tadpoles = Tadpole.all
   end
 
+  #get /tadpoles/1
   def show
   end
 
+  #get /tadpoles/new (form page)
   def new
     @frog = Frog.find(set_frog)
     @tadpole = Tadpole.new
   end
 
+  #get /tadpoles/new (form page)
   def edit
     @frog = @tadpole.frog
   end
 
+  #post /tadpoles 
   def create
     @tadpole = Tadpole.new(tadpole_params)
     respond_to do |format|
@@ -47,8 +52,25 @@ class TadpolesController < ApplicationController
     end
   end
 
+  def metamorphose 
+
+    @tadpole = set_tadpole #sets to the current frog
+
+    new_frog = Frog.create( #creates the frog based on the tadpole information
+      name:@tadpole.name,
+      color:@tadpole.color,
+      pond:Frog.find(@tadpole.frog_id).pond
+      )
+
+    @tadpole.destroy #deletes that tadpole
+
+    redirect_to frog_path(new_frog) #redirects to the new frogs page
+
+  
+  end 
+
   private
-    def set_tadpole
+    def set_tadpole #finds the frog with the current id and sets it.
       @tadpole = Tadpole.find(params[:id])
     end
 
